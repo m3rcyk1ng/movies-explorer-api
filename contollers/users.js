@@ -57,7 +57,6 @@ module.exports.login = (req, res, next) => {
             // хеши не совпали — отклоняем промис
             throw new UnauthorizedError('Передан неверный логин или пароль');
           }
-          const { NODE_ENV, JWT_SECRET } = process.env;
           const token = jwt.sign(
             { _id: user._id },
             JWT_SECRET,

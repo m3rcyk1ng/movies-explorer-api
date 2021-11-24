@@ -95,3 +95,7 @@ module.exports.updateProfileInfo = (req, res, next) => {
       next(err);
     });
 };
+
+module.exports.logout = (req, res) => {
+  res.clearCookie('jwt').end();
+};

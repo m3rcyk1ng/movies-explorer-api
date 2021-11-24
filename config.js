@@ -10,6 +10,6 @@ const {
 
 module.exports = {
   JWT_SECRET: NODE_ENV === 'production' ? JWT_SECRET : 'eto-super-secret-key-for-password-amin',
-  MONGO_URL: NODE_ENV === 'production' ? DATA_BASE : 'mongodb://localhost:27017/moviesdb',
+  DATA_BASE: NODE_ENV === 'production' ? DATA_BASE : 'mongodb://localhost:27017/moviesdb',
   PORT: NODE_ENV === 'production' ? PORT : 3001,
 };

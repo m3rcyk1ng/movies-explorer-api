@@ -9,7 +9,6 @@ const { options } = require('./utils/constants');
 
 const app = express();
 const router = require('./routes/index');
-const NotFoundError = require('./errors/not-found-error');
 
 const errorsModule = require('./middlewares/errorsModule');
 
@@ -22,9 +21,6 @@ app.use('*', cors(options));
 app.use(cookieParser());
 app.use(requestLogger);
 app.use(router);
-app.use((req, res, next) => {
-  next(new NotFoundError('Ресурс не найден'));
-});
 app.use(errorLogger);
 app.use(errors());
 app.use(errorsModule);

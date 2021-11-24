@@ -13,9 +13,7 @@ const errorsModule = require('./middlewares/errorsModule');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(DATA_BASE, {
-  useNewUrlParser: true,
-});
+mongoose.connect(DATA_BASE);
 
 app.use('*', cors(options));
 app.use(cookieParser());

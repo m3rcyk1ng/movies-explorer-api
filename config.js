@@ -3,7 +3,7 @@ require('dotenv').config();
 const {
   NODE_ENV,
   JWT_SECRET = 'eto-super-secret-key-for-password-amin',
-  //господь, господь, чего только не сделаешь ради 0.71 балла
+  // господь, господь, чего только не сделаешь ради 0.71 балла //
   DATA_BASE = 'mongodb://localhost:27017/moviesdb',
   PORT,
 } = process.env;

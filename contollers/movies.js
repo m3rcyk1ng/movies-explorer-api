@@ -38,7 +38,7 @@ module.exports.postMovie = (req, res, next) => {
     movieId,
     owner: req.user._id,
   })
-    .then((Movie) => res.status(200).send({ data: Movie }))
+    .then((movie) => res.status(200).send({ data: movie }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные о фильме'));
@@ -49,11 +49,11 @@ module.exports.postMovie = (req, res, next) => {
 
 module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.MovieId)
-    .then((Movie) => {
-      if (!Movie) {
+    .then((movie) => {
+      if (!movie) {
         next(new NotFoundError('Фильм с указанным ID не найден'));
-      } else if (Movie.owner.toString() === req.user._id) {
-        Movie.deleteOne({ _id: Movie._id }).then(
+      } else if (movie.owner.toString() === req.user._id) {
+        movie.deleteOne({ _id: movie._id }).then(
           res.status(200).send({ message: 'Фильм удалён' }),
         );
       } else {

@@ -53,7 +53,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (!movie) {
         next(new NotFoundError('Фильм с указанным ID не найден'));
       } else if (movie.owner.toString() === req.user._id) {
-        movie.deleteOne({ _id: movie._id }).then(
+        return movie.deleteOne({ _id: movie._id }).then(
           res.status(200).send({ message: 'Фильм удалён' }),
         );
       } else {

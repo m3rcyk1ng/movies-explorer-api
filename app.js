@@ -6,6 +6,7 @@ const { errors } = require('celebrate');
 const { DATA_BASE, PORT } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { options } = require('./utils/constants');
+const { limiter } = require('./middlewares/limiter');
 
 const app = express();
 const router = require('./routes/index');
@@ -20,6 +21,7 @@ mongoose.connect(DATA_BASE);
 app.use('*', cors(options));
 app.use(cookieParser());
 app.use(requestLogger);
+app.use(limiter);
 app.use(router);
 app.use(errorLogger);
 app.use(errors());

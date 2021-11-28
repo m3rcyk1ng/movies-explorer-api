@@ -1,4 +1,3 @@
-require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -20,8 +19,9 @@ module.exports.postUser = (req, res, next) => {
       }
       if (err.name === 'MongoServerError') {
         next(new ConflictError('Пользователь с таким e-mail уже существует'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -90,9 +90,15 @@ module.exports.updateProfileInfo = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные при обновлении профиля'));
+        return next(new BadRequestError('Переданы некорректные данные при обновлении профиля'));
       }
-      next(err);
+      if (err.name === 'CastError') {
+        return next(new BadRequestError('Передан некорректный id пользователя'));
+      }
+      if (err.code === 11000) {
+        return next(new ConflictError('Переданный Email уже используется другим пользователем'));
+      }
+      return next(err);
     });
 };
 

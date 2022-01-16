@@ -103,5 +103,7 @@ module.exports.updateProfileInfo = (req, res, next) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie('jwt').end();
+  res
+    .clearCookie('jwt')
+    .send({ message: 'Выход совершен успешно' });
 };

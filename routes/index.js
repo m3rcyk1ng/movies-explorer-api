@@ -9,7 +9,7 @@ const NotFoundError = require('../errors/not-found-error');
 
 router.post('/signup', validationSignup, postUser);
 router.post('/signin', validationLogin, login);
-router.get('/signout', logout);
+router.post('/signout', logout);
 
 router.use(auth);
 router.use(moviesRouter);
